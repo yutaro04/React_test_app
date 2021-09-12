@@ -1,25 +1,36 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import Moveable from 'react-moveable';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [target, setTarget] = useState(null);
+
+  useEffect(() => {
+    setTarget(document.querySelector('.mix'));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <div className={'moveable mix'}>mix</div>
+      <Moveable
+        target={target}
+        draggable={true}
+        scalable={true}
+        rotatable={true}
+        origin={false}
+        throttleRotate={0}
+        onDrag={e => {
+          e.target.style.transform = e.transform;
+        }}
+        onScale={e => {
+          e.target.style.transform = e.transform;
+        }}
+        onRotate={e => {
+          e.target.style.transform = e.transform;
+        }}
+      />
+    </React.Fragment>
   );
-}
+};
 
 export default App;
